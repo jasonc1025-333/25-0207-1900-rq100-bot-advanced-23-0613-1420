@@ -1,5 +1,6 @@
 {
     "name": "25-0207-1900-rq100-bot-advanced-23-0613-1420",
+    "version": "0.0.1",
     "description": "",
     "dependencies": {
         "core": "*",
