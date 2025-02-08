@@ -113,14 +113,14 @@
 // 22-1218
 // 
 // * TYJ used Medium 2KG-Torque Twin Motors can lift 200g w/o much strain, 250g with straining. Direct axle shaft best for max torque.  Avoid Dog-Gear for Max Torque.  These motors stop being strong enough to cut/break/severe/pinch off your finger.  ; )
-function screen_Show_Command_Func(screen_X_In: number, screen_Y_In: number) {
+function screen_Show_Command_Func (screen_X_In: number, screen_Y_In: number) {
     led.plotBrightness(screen_X_In, screen_Y_In, screenBrightness_Hi_DEFAULT_INT)
     // too long: 50ms, 100ms, 500ms
     basic.pause(20)
     led.unplot(screen_X_In, screen_Y_In)
     screen_Show_DiagnosticDashboard_Func()
 }
-function screen_Show_DiagnosticDashboard_Func() {
+function screen_Show_DiagnosticDashboard_Func () {
     screen_Clear_Fn(4, 4)
     doGroupChannelShow_Func()
 }
@@ -223,7 +223,7 @@ function screen_Show_DiagnosticDashboard_Func() {
 // 2021-0311
 // 
 // * Calibration: Swirl Around Like Panning for Gold, Moving Marble Around on Flat-Plane
-function setup_Network_Fn() {
+function setup_Network_Fn () {
     if (true) {
         // Only 20 Leds Available
         network_GroupChannel_MyBotAndController_BASE0_MAX_INT = 25
@@ -239,7 +239,7 @@ function setup_Network_Fn() {
             // * 3 sec  TOO SLOW? >> try 2 >> try 1 WILL CAUSE TOO MUCH NETWORK OVERHEAD
             network_HiMessage_Frequency_SEC_INT = 1
             quest_Note_3.quest_Show_String_For_Note_Small_Func(
-                "IMPORTANT: Network Message will be cut off beyond Max Length"
+            "IMPORTANT: Network Message will be cut off beyond Max Length"
             )
             network_Message_LENGTH_MAX_INT = 18
         }
@@ -348,7 +348,7 @@ function setup_Network_Fn() {
 // 3000 no
 // 
 // * Using DFRobot Servo Pins not reliable, possibly since these are 3.3.v servos (not standard 5.0v servos), thus use MicroBit 'servo write pin Pxx' blocks for reliable 0-180 degrees.
-function setup_BotAndController_Fn() {
+function setup_BotAndController_Fn () {
     if (true) {
         _codeComment_AsText = "System Constants"
         if (true) {
@@ -397,7 +397,7 @@ function setup_BotAndController_Fn() {
             tilt_Screen_Y_0to4_Old_Int = _system_InvalidNumber_NEG_999_INT
             joystick_Tilt_Gear_Lo_ForMore_TurnControl_Dec = 0.3
             quest_Note_2.quest_Show_String_For_Note_Small_Func(
-                "Was 0.6, now increase to 0.9"
+            "Was 0.6, now increase to 0.9"
             )
             joystick_Tilt_Gear_Hi_ForMore_StraightSpeed_Dec = 0.9
             joystick_Tilt_Gear_Now_Dec = joystick_Tilt_Gear_Lo_ForMore_TurnControl_Dec
@@ -414,20 +414,20 @@ function setup_BotAndController_Fn() {
         quest_Dashboard.quest_Show_Oled_Cleared_Func(
         )
         quest_Dashboard.quest_Show_String_For_Oled_BigFont_Func(
-            "Hi :)",
-            0,
-            0
+        "Hi :)",
+        0,
+        0
         )
     }
     if (true) {
         quest_Note_2.quest_Show_String_For_Note_Small_Func(
-            "Default: Down Pos."
+        "Default: Down Pos."
         )
         wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S6, 0)
         wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S7, 45)
     }
 }
-function doGroupChannelShow_Func() {
+function doGroupChannelShow_Func () {
     if (true) {
         doGroupChannel_Show_PerDigit_Func(network_GroupChannel_MyBotAndController_Digit_Hundreds_Int, 0, 0)
         doGroupChannel_Show_PerDigit_Func(network_GroupChannel_MyBotAndController_Digit_Tens_Int, 1, 0)
@@ -435,7 +435,7 @@ function doGroupChannelShow_Func() {
     }
 }
 // For these above radio-packets: Do this sub-stack for max cpu-cycles for driving motors for fastest real-time response
-function driveMotor_Fn() {
+function driveMotor_Fn () {
     // Main 1of5: Initialize w/ Pitch on Both Motors L & R - along w/ 'motor_Power_Slower*' adjustments
     if (true) {
         joystick_Tilt_X_Neg100toPos100_Int = (joystick_Raw_X_0to200_Int - 100) * joystick_Tilt_Gear_Now_Dec
@@ -452,9 +452,9 @@ function driveMotor_Fn() {
         motor_Power_R_Neg100toPos100_Int = Math.constrain(motor_Power_R_Neg100toPos100_Int + -1 * joystick_Tilt_X_Neg100toPos100_Int, -100, 100)
         // /jwc o roboQuest.quest_PowerMotorsViaBlueRedBlackPins_Fn(quest_PortGroup_BlueRedBlack_PortIds_Enum.S1_MotorLeft__S0_MotorRight, motor_Power_L_Neg100toPos100_Int, motor_Power_R_Neg100toPos100_Int)
         quest_Motors.quest_Set_PowerMotorsViaBlueRedBlackPins_Func(
-            quest_PortGroup_BlueRedBlack_PortIds_Enum.S1_MotorLeft__S0_MotorRight,
-            motor_Power_L_Neg100toPos100_Int,
-            motor_Power_R_Neg100toPos100_Int
+        quest_PortGroup_BlueRedBlack_PortIds_Enum.S1_MotorLeft__S0_MotorRight,
+        motor_Power_L_Neg100toPos100_Int,
+        motor_Power_R_Neg100toPos100_Int
         )
     }
     // Main 4of5: Screen LED
@@ -526,7 +526,7 @@ radio.onReceivedValue(function (name, value) {
             wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S7, 45)
         } else if (name == "serv_up") {
             quest_Note_2.quest_Show_String_For_Note_Small_Func(
-                "Delta: 45deg between Up & Down"
+            "Delta: 45deg between Up & Down"
             )
             wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S6, 45)
             wuKong.setServoAngle(wuKong.ServoTypeList._180, wuKong.ServoList.S7, 0)
@@ -535,7 +535,7 @@ radio.onReceivedValue(function (name, value) {
         }
     }
 })
-function screen_ScrollText_Fn(text_Str_In: string) {
+function screen_ScrollText_Fn (text_Str_In: string) {
     // Fragment the substrings to be interruptible between each 'show string' block
     _tmp_Str = text_Str_In.split(",")
     for (let value of _tmp_Str) {
@@ -545,14 +545,14 @@ function screen_ScrollText_Fn(text_Str_In: string) {
         }
     }
 }
-function screen_Clear_Fn(row_X_Max_In: number, col_Y_Max_In: number) {
+function screen_Clear_Fn (row_X_Max_In: number, col_Y_Max_In: number) {
     for (let index_X = 0; index_X <= row_X_Max_In; index_X++) {
         for (let index_Y = 0; index_Y <= col_Y_Max_In; index_Y++) {
             led.unplot(index_X, index_Y)
         }
     }
 }
-function doGroupChannel_Show_PerDigit_Func(singleDigit_In: number, OffsetX_In: number, OffsetY_In: number) {
+function doGroupChannel_Show_PerDigit_Func (singleDigit_In: number, OffsetX_In: number, OffsetY_In: number) {
     for (let index2 = 0; index2 <= singleDigit_In - 1; index2++) {
         led.plotBrightness(4 - (Math.idiv(index2, 5) + OffsetX_In), 4 - (index2 % 5 + OffsetY_In), screenBrightness_MI_INT)
     }
@@ -621,7 +621,7 @@ if (true) {
 if (true) {
     _codeComment_AsText = "Set Group_Channel_# for Both Bot & Controller_Joystick"
     // * Good Stress Test: 199 (to test all dots for 10's, 1's; 255 (to test all dots for 100's: 1,2)
-    network_GroupChannel_MyBotAndController_Base0_Int = 1
+    network_GroupChannel_MyBotAndController_Base0_Int = 2
 }
 if (true) {
     setup_BotAndController_Fn()
@@ -630,7 +630,7 @@ if (true) {
 loops.everyInterval(2000, function () {
     if (true) {
         quest_Note_2.quest_Show_String_For_Note_Small_Func(
-            "Range: 0 - 255"
+        "Range: 0 - 255"
         )
         sensor_LightLevel_Raw_Int = input.lightLevel()
         if (sensor_LightLevel_Raw_Int <= 85) {
@@ -643,7 +643,7 @@ loops.everyInterval(2000, function () {
     }
     if (true) {
         quest_Note_2.quest_Show_String_For_Note_Small_Func(
-            "Range: 0 - 2000+"
+        "Range: 0 - 2000+"
         )
         sensor_Magnetometer_Force_Raw_Int = Math.round(input.magneticForce(Dimension.Strength))
         if (sensor_Magnetometer_Force_Raw_Int <= 100) {
@@ -658,13 +658,13 @@ loops.everyInterval(2000, function () {
     }
     if (true) {
         quest_Note_3.quest_Show_String_For_Note_Small_Func(
-            "Not end w/'delimiter' or will create a fake key_value pair at receiving end"
+        "Not end w/'delimiter' or will create a fake key_value pair at receiving end"
         )
         // network_Message_Str = "" + convertToText(network_GroupChannel_MyBotAndController_Base0_Int) + ":" + convertToText(input.lightLevel()) + ":" + convertToText(input.temperature()) + ":" + convertToText(0)
         // network_Message_Str = "ID:" + convertToText(botGroupChannelNum_Int) + ", TE:" + convertToText(input.temperature()) + ", LI:" + convertToText(input.lightLevel()) + ", CO:" + convertToText(input.compassHeading()) + ", MX:" + convertToText(input.magneticForce(Dimension.X)) + ", MY:" + convertToText(input.magneticForce(Dimension.Y)) + ", MZ:" + convertToText(input.magneticForce(Dimension.Z)) + ", MT:" + convertToText(input.magneticForce(Dimension.Strength))
         network_Message_Str = "#:" + convertToText(network_GroupChannel_MyBotAndController_Base0_Int) + ",L:" + convertToText(sensor_LightLevel_Raw_Int) + ",M:" + convertToText(sensor_Magnetometer_Force_Raw_Int)
         quest_Note_3.quest_Show_String_For_Note_Big_Func(
-            "Network_Message Max Length or will be cut off"
+        "Network_Message Max Length or will be cut off"
         )
         if (network_Message_Str.length > network_Message_LENGTH_MAX_INT) {
             basic.showString("ERROR: Network Message > Max Len.")
@@ -675,13 +675,6 @@ loops.everyInterval(2000, function () {
         if (_debug_Show_Priority_Hi_Bool) {
             serial.writeLine("> " + network_Message_Str)
         }
-    }
-})
-basic.forever(function () {
-    if (_system_BotAndController_Mode_Int == _system_BotAndController_Mode_As_COMMAND_AS_MAIN_MODE_INT) {
-        radio.sendString("HiFrom_B")
-        // /jwc o roboQuest.quest_ContinueCurrentState_CountdownTimer_Set_Fn(network_HiMessage_Frequency_SEC_INT, quest_Time_Units_Enum.Seconds)
-        quest_Timer.quest_Set_ContinueCurrentState_CountdownTimer_Func(network_HiMessage_Frequency_SEC_INT, quest_Time_Units_Enum.Seconds)
     }
 })
 basic.forever(function () {
@@ -722,5 +715,12 @@ basic.forever(function () {
         if (input.buttonIsPressed(Button.A) || input.buttonIsPressed(Button.B)) {
             _system_BotAndController_Mode_Int = _system_BotAndControllelr_Mode_As_SETUP_TO_MAIN_INT
         }
+    }
+})
+basic.forever(function () {
+    if (_system_BotAndController_Mode_Int == _system_BotAndController_Mode_As_COMMAND_AS_MAIN_MODE_INT) {
+        radio.sendString("HiFrom_B")
+        // /jwc o roboQuest.quest_ContinueCurrentState_CountdownTimer_Set_Fn(network_HiMessage_Frequency_SEC_INT, quest_Time_Units_Enum.Seconds)
+        quest_Timer.quest_Set_ContinueCurrentState_CountdownTimer_Func(network_HiMessage_Frequency_SEC_INT, quest_Time_Units_Enum.Seconds)
     }
 })
